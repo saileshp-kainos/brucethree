@@ -14,6 +14,10 @@ router.use(function (req, res, next) {
         next();
     }
 });
+router.post('/filter-employees', async (req, res) => {
+    employees = await db.filterEmployees(req.body.filter);
+    res.render('list-employees', {employees, filterValue: req.body.filter});
+})
 
 router.get('/list-employees', async (req, res) => {
     res.render('list-employees', {employees: await db.getEmployees()});
