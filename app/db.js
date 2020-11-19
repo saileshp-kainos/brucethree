@@ -48,7 +48,11 @@ exports.getEmployees = async () => {
   
 }
 exports.addEmployees = async(employee) => {
-    return await addEmployee(employee);
+    try{
+        return await addEmployee(employee);
+    }catch(err){
+        console.log(err)
+    }
 }
 
 exports.filterEmployees = async(department)=> {
@@ -67,7 +71,12 @@ exports.filterEmployees = async(department)=> {
 }
 
 exports.addSalesEmployee = async(employeeID, CommissionRate, TotalSales) => {
-    return await addSalesEmployee(employeeID, CommissionRate, TotalSales);
+    try {
+        return await addSalesEmployee(employeeID, CommissionRate, TotalSales);
+    }catch(err){
+
+    }
+    
 }
 
 getFilterEmployees = async (department) => {
