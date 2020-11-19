@@ -1,8 +1,13 @@
+{% extends "layout_unbranded.html" %} 
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
 {% if errormessage %} 
+
 <div class="govuk-error-message">{{ errormessage }}</div> 
 {% endif %}
+<h1 class="govuk-heading-xl"> Employee Details </h1>
 <form class="form-group" method='post' action='/insert-employee'>
 {{ govukInput({
     label: {
@@ -74,3 +79,4 @@
   type: 'submit'
 }) }}
 </form>
+{% endblock %}
