@@ -22,13 +22,31 @@ router.get('/', (req, res) => {
 router.post('/insert-employee', async (req, res) => {
     var employee = req.body;
 
-    if(req.body.NINumber.length < 10){
+    if(req.body.NINumber.length != 10){
+        res.locals.errormessage = 'Failed to insert. Try again.';
+        res.render('add-employee', req.body);
+    } else if (req.body.NINumber.length == 0) {
+        res.locals.errormessage = 'Empty NI Number';
+        res.render('add-employee', req.body);
+    } else if (req.body.EmployeeName.length == 0) {
+        res.locals.errormessage = 'Empty Name';
+        res.render('add-employee', req.body);
+    } else if (req.body.StartingSalary.length == 0) {
+        res.locals.errormessage = 'Empty Starting Salary';
+        res.render('add-employee', req.body);
+    } else if (req.body.EmployeeAddress.length == 0) {
+        res.locals.errormessage = 'Empty Address';
+        res.render('add-employee', req.body);
+    } else if (req.body.IBAN.length == 0) {
+        res.locals.errormessage = 'Empty IBAN';
+        res.render('add-employee', req.body);
+    } else if (req.body.BIC == 0) {
+        res.locals.errormessage = 'Empty BIC';
+        res.render('add-employee', req.body);
+    } else {
         let result = await db.addEmployees(employee);
         console.log(result);
         res.redirect('/list-employees');
-    } else {
-        res.locals.errormessage = 'Failed to insert. Try again.';
-        res.render('add-employee', req.body);
     }
 
 })
