@@ -30,13 +30,16 @@ router.get('/add-employee', (req, res) => {
 router.get('/', (req, res) => {
     res.render('home', {});
 })
-router.post('/login-user', (req, res) => {
+router.post('/login-user', async (req, res) => {
     console.log('test')
-    con = db.loginUser(req.body.username, req.body.password);
+    con = await db.loginUser(req.body.username, req.body.password);
+    
     console.log('test', con)
     if (con){
         res.render('home');
         amILoggedIn = true;
+    }else{
+        res.render('user', {errormessage: 'Failed to Connect, please enter the correct user and password'});
     }
 })
 router.get('/signout', (req, res) => {
