@@ -1,0 +1,41 @@
+{% extends "layout_unbranded.html" %} 
+{% block pageTitle %} 
+  List of Employees 
+{% endblock %} 
+ 
+{% block content %}
+ 
+  <table class="govuk-table">
+  <caption class="govuk-table__caption">Employees</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">ID</th>
+      <th scope="col" class="govuk-table__header">Name</th>
+      <th scope="col" class="govuk-table__header">Address</th>
+      <th scope="col" class="govuk-table__header">National Insurance Number</th>
+      <th scope="col" class="govuk-table__header">Starting Salary</th>
+      <th scope="col" class="govuk-table__header">IBAN</th> 
+      <th scope="col" class="govuk-table__header">BIC</th> 
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    {% for employee in employees %}
+       <tr class="govuk-table__row">
+        <td class="govuk-table__cell">{{employee.EmployeeID}}
+        <td class="govuk-table__cell">{{employee.EmployeeName}}
+        <td class="govuk-table__cell">{{employee.EmployeeAddress}}
+        <td class="govuk-table__cell">{{employee.NINumber}}
+        <td class="govuk-table__cell">{{employee.StartingSalary}}
+        <td class="govuk-table__cell">{{employee.IBAN}}
+        <td class="govuk-table__cell">{{employee.BIC}}
+    </tr>
+  {% endfor %}
+   
+
+  </tbody>
+</table>
+
+
+<a href="/newemployee">Add New Employee</a>
+
+{% endblock %}
