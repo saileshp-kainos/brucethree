@@ -1,7 +1,8 @@
 const mysql = require('mysql'); 
-const dbconfig = require('./credentials.json'); 
+let dbconfig = require('./credentials.json'); 
 const util = require ('util');
-const db = wrapDB(dbconfig);
+let db = null;
+
 
 function wrapDB (dbconfig) { 
     const pool = mysql.createPool(dbconfig) 
@@ -17,7 +18,15 @@ function wrapDB (dbconfig) {
         } 
     } 
 }
-
+exports.loginUser = (username, password) => {
+    dbconfig.user = username;
+    dbconfig.password = password;
+    console.log(dbconfig)
+    db = wrapDB(dbconfig);
+    if (db){
+        return true;
+    }
+}
 exports.getEmployees = async () => {
     var result = await getEmployees();
     console.log(result);
