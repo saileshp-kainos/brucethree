@@ -4,7 +4,25 @@
 {% endblock %} 
  
 {% block content %}
- 
+  <div class="govuk-form-group">
+  <label class="govuk-label" for="sort">
+    Filter by Department
+  </label>
+  <form class="form-group" method='post' action='/filter-employees'>
+    <select class="govuk-select" id="filter" name="filter" selected = filterValue>
+        <option value="HR">HR</option>
+        <option value="Sales" selected>Sales</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Support">Support</option>
+        <option value="Finance">Finance</option>
+        <option value="All">All</option>
+      </select>
+    </div>
+    {{ govukButton({
+      text: "Filter",
+      type: 'submit'
+    }) }}
+  </form>
   <table class="govuk-table">
   <caption class="govuk-table__caption">Employees</caption>
   <thead class="govuk-table__head">
@@ -16,11 +34,12 @@
       <th scope="col" class="govuk-table__header">Starting Salary</th>
       <th scope="col" class="govuk-table__header">IBAN</th> 
       <th scope="col" class="govuk-table__header">BIC</th> 
+      <th scope="col" class="govuk-table__header">Department</th> 
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    {% for employee in employees %}
-       <tr class="govuk-table__row">
+    {% for employee in employees  %}
+        <tr class="govuk-table__row">
         <td class="govuk-table__cell">{{employee.EmployeeID}}
         <td class="govuk-table__cell">{{employee.EmployeeName}}
         <td class="govuk-table__cell">{{employee.EmployeeAddress}}
@@ -28,6 +47,7 @@
         <td class="govuk-table__cell">{{employee.StartingSalary}}
         <td class="govuk-table__cell">{{employee.IBAN}}
         <td class="govuk-table__cell">{{employee.BIC}}
+        <td class="govuk-table__cell">{{employee.Department}}
     </tr>
   {% endfor %}
    

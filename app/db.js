@@ -37,7 +37,7 @@ exports.loginUser = async (username, password) => {
 }
 exports.getEmployees = async () => {
     var result = await getEmployees();
-    console.log(result);
+  
     return result;
   
 }
@@ -45,9 +45,21 @@ exports.addEmployees = async(employee) => {
     return await addEmployee(employee);
 }
 
+exports.filterEmployees = async(department)=> {
+    console.log(department)
+    if (department == 'All'){
+        return await getEmployees()
+    }else{
+        return await getFilterEmployees(department)
+    }
+    
+}
 
+getFilterEmployees = async (department) => {
+    return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, IBAN, BIC, Department FROM Employee WHERE department = ?", department);
+}
 getEmployees = async () => {
-    return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, IBAN, BIC FROM Employee");
+    return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, IBAN, BIC, Department FROM Employee");
 }
 testConnection = async () => {
     return await db.query( "SELECT * FROM Employee LIMIT 1");
