@@ -36,9 +36,15 @@ exports.loginUser = async (username, password) => {
     }
 }
 exports.getEmployees = async () => {
-    var result = await getEmployees();
+    try {
+        var result = await getEmployees();
+        return result;
+    }catch(err){
+        console.log(err)
+    }
+    
   
-    return result;
+   
   
 }
 exports.addEmployees = async(employee) => {
@@ -46,23 +52,28 @@ exports.addEmployees = async(employee) => {
 }
 
 exports.filterEmployees = async(department)=> {
-    console.log(department)
-    if (department == 'All'){
-        return await getEmployees()
-    }else{
-        return await getFilterEmployees(department)
+    try {
+        console.log(department)
+        if (department == 'All'){
+            return await getEmployees()
+        }else{
+            return await getFilterEmployees(department)
+        }
+    }catch(err){
+        console.log(err)
     }
+   
     
 }
 
 getFilterEmployees = async (department) => {
-    return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, IBAN, BIC, Department FROM Employee WHERE department = ?", department);
+    return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, Department FROM report WHERE department = ?", department);
 }
 getEmployees = async () => {
-    return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, IBAN, BIC, Department FROM Employee");
+    return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary,Department FROM report");
 }
 testConnection = async () => {
-    return await db.query( "SELECT * FROM report");
+    return await db.query( "show grants");
 }
 addEmployee = async(employee) => {
     return await db.query("INSERT INTO Employee(EmployeeName,EmployeeAddress, NINumber, StartingSalary,IBAN,BIC, Department) VALUES (?,?,?,?,?,?,?)", [employee.EmployeeName, employee.EmployeeAddress, employee.NINumber, employee.StartingSalary, employee.IBAN, employee.BIC, employee.Department]);
