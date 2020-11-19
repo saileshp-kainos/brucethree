@@ -66,6 +66,10 @@ exports.filterEmployees = async(department)=> {
     
 }
 
+exports.addSalesEmployee = async(employeeID, CommissionRate, TotalSales) => {
+    return await addSalesEmployee(employeeID, CommissionRate, TotalSales);
+}
+
 getFilterEmployees = async (department) => {
     return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, Department FROM report WHERE department = ?", department);
 }
@@ -77,4 +81,7 @@ testConnection = async () => {
 }
 addEmployee = async(employee) => {
     return await db.query("INSERT INTO Employee(EmployeeName,EmployeeAddress, NINumber, StartingSalary,IBAN,BIC, Department) VALUES (?,?,?,?,?,?,?)", [employee.EmployeeName, employee.EmployeeAddress, employee.NINumber, employee.StartingSalary, employee.IBAN, employee.BIC, employee.Department]);
+}
+addSalesEmployee = async(employeeID, CommissionRate, TotalSales) => {
+    return await db.query("INSERT INTO SalesEmployee (EmployeeID, CommissionRate, SalesTotal) VALUES (?, ?, ?)", [employeeID, CommissionRate, TotalSales]);
 }

@@ -1,0 +1,107 @@
+{% extends "layout_unbranded.html" %} 
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+{% if errormessage %} 
+
+<div class="govuk-error-message">{{ errormessage }}</div> 
+{% endif %}
+<h1 class="govuk-heading-xl"> Sales Employee Details </h1>
+<form class="form-group" method='post' action='/insert-salesemployee'>
+{{ govukInput({
+    label: {
+      text: "Name",
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    id: "EmployeeName",
+    name: "EmployeeName",
+    value: EmployeeName
+   
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Starting Salary",
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    id: "StartingSalary",
+    name: "StartingSalary",
+    value: StartingSalary
+  }) }}
+  
+  {{ govukInput({
+    label: {
+      text: "NI Number",
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    maxlength: "9",
+    classes: "govuk-input--width-9",
+    id: "NINumber",
+    name: "NINumber",
+    value: NINumber
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Employee Address",
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    id: "EmployeeAddress",
+    name:"EmployeeAddress",
+    value: EmployeeAddress
+  }) }}
+    {{ govukInput({
+    label: {
+      text: "IBAN",
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    id: "IBAN",
+    name:"IBAN",
+    value: IBAN
+  }) }}
+  {{ govukInput({
+    label: {
+      text: "BIC",
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    id: "BIC",
+    name:"BIC",
+    value: BIC
+  }) }}
+  {{ govukInput({
+    label: {
+      text: "Commission rate",
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    id: "CommissionRate",
+    name:"CommissionRate",
+    value: CommissionRate
+  }) }}
+  {{ govukInput({
+    label: {
+      text: "Total Sales",
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    id: "TotalSales",
+    name:"TotalSales",
+    value: TotalSales
+  }) }}
+
+
+  
+{{ govukButton({
+  text: "Save and continue",
+  type: 'submit'
+}) }}
+
+</form>
+{% endblock %}
