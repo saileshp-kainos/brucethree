@@ -37,11 +37,11 @@ router.post('/insert-employee', async (req, res) => {
     } else if (req.body.EmployeeAddress.length == 0) {
         res.locals.errormessage = 'Empty Address';
         res.render('add-employee', req.body);
-    } else if (req.body.IBAN.length == 0) {
-        res.locals.errormessage = 'Empty IBAN';
+    } else if (req.body.IBAN.length > 0 && req.body.BIC == 0) {
+        res.locals.errormessage = 'Please enter a valid BIC along with your IBAN';
         res.render('add-employee', req.body);
-    } else if (req.body.BIC == 0) {
-        res.locals.errormessage = 'Empty BIC';
+    } else if (req.body.BIC > 0 && req.body.IBAN.length == 0) {
+        res.locals.errormessage = 'Please enter a valid IBAN along with your BIC';
         res.render('add-employee', req.body);
     } else if (!/^([a-zA-Z]){2}( )?([0-9]){2}( )?([0-9]){2}( )?([0-9]){2}( )?([a-zA-Z]){1}?$/.test(req.body.NINumber)) {
         res.locals.errormessage = 'Your National Insurance Number does not meet the valid format. Please enter a valid NI number.';
