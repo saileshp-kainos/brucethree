@@ -5,11 +5,12 @@
  
 {% block content %}
   <div class="govuk-form-group">
+  <h1 class="govuk-heading-xl"> Filter By Department </h1>
   <label class="govuk-label" for="sort">
-    Filter by Department
+   Filtered by {{filterValue}}
   </label>
   <form class="form-group" method='post' action='/filter-employees'>
-    <select class="govuk-select" id="filter" name="filter" selected = filterValue>
+    <select class="govuk-select" id="filter" name="filter">
         <option value="HR">HR</option>
         <option value="Sales" selected>Sales</option>
         <option value="Marketing">Marketing</option>
