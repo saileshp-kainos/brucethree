@@ -1,7 +1,8 @@
 const mysql = require('mysql'); 
-const dbconfig = require('./credentials.json'); 
+let dbconfig = require('./credentials.json'); 
 const util = require ('util');
-const db = wrapDB(dbconfig);
+let db = null;
+
 
 function wrapDB (dbconfig) { 
     const pool = mysql.createPool(dbconfig) 
@@ -17,7 +18,23 @@ function wrapDB (dbconfig) {
         } 
     } 
 }
+exports.loginUser = async (username, password) => {
+    dbconfig.user = username;
+    dbconfig.password = password;
+    console.log(dbconfig)
+    db = wrapDB(dbconfig);
+ 
+    try {
+        res = await testConnection();
+    }catch (err){
+        console.log('fail connection')
+        return false;
+    }
 
+    if (db){
+        return true;
+    }
+}
 exports.getEmployees = async () => {
     var result = await getEmployees();
     console.log(result);
@@ -28,10 +45,13 @@ exports.addEmployees = async(employee) => {
     return await addEmployee(employee);
 }
 
+
 getEmployees = async () => {
     return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, IBAN, BIC FROM Employee");
 }
-
+testConnection = async () => {
+    return await db.query( "SELECT * FROM Employee LIMIT 1");
+}
 addEmployee = async(employee) => {
     return await db.query("INSERT INTO Employee(EmployeeName,EmployeeAddress, NINumber, StartingSalary,IBAN,BIC) VALUES (?,?,?,?,?,?)", [employee.EmployeeName, employee.EmployeeAddress, employee.NINumber, employee.StartingSalary, employee.IBAN, employee.BIC]);
 
