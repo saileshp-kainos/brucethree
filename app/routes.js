@@ -43,6 +43,9 @@ router.post('/insert-employee', async (req, res) => {
     } else if (req.body.BIC == 0) {
         res.locals.errormessage = 'Empty BIC';
         res.render('add-employee', req.body);
+    } else if (!/^([a-zA-Z]){2}( )?([0-9]){2}( )?([0-9]){2}( )?([0-9]){2}( )?([a-zA-Z]){1}?$/.test(req.body.NINumber)) {
+        res.locals.errormessage = 'Your National Insurance Number does not meet the valid format. Please enter a valid NI number.';
+        res.render('add-employee', req.body);
     } else {
         let result = await db.addEmployees(employee);
         console.log(result);
