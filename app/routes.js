@@ -22,8 +22,8 @@ router.get('/', (req, res) => {
 router.post('/insert-employee', async (req, res) => {
     var employee = req.body;
 
-    if(req.body.NINumber.length != 10){
-        res.locals.errormessage = 'Failed to insert. Try again.';
+    if(req.body.NINumber.length > 9){
+        res.locals.errormessage = 'NI Number too long. Try again.';
         res.render('add-employee', req.body);
     } else if (req.body.NINumber.length == 0) {
         res.locals.errormessage = 'Empty NI Number';
