@@ -8,7 +8,7 @@
 <div class="govuk-error-message">{{ errormessage }}</div> 
 {% endif %}
 <h1 class="govuk-heading-xl"> Sales Employee Details </h1>
-<form class="form-group" method='post' action='/insert-employee'>
+<form class="form-group" method='post' action='/insert-salesemployee'>
 {{ govukInput({
     label: {
       text: "Name",
@@ -95,40 +95,6 @@
     name:"TotalSales",
     value: TotalSales
   }) }}
-
-{{ govukSelect({
-  id: "Department",
-  name: "Department",
-  label: {
-    text: "Department",
-    classes: "govuk-label--l",
-    isPageHeading: true
-  },
-  items: [
-    {
-      value: "HR",
-      text: "HR"
-    },
-    {
-      value: "Sales",
-      text: "Sales",
-      selected: true
-    },
-    {
-      value: "Marketing",
-      text: "Marketing"
-    },
-    {
-      value: "Support",
-      text: "Support"
-    },
-    {
-      value: "Finance",
-      text: "Finance"
-    }
-  ]
-}) }}
-
 
 
   
