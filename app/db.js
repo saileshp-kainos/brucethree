@@ -50,7 +50,7 @@ getEmployees = async () => {
     return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, IBAN, BIC FROM Employee");
 }
 testConnection = async () => {
-    return await db.query( "SELECT * FROM Employee LIMIT 1");
+    return await db.query( "SELECT * FROM report");
 }
 addEmployee = async(employee) => {
     return await db.query("INSERT INTO Employee(EmployeeName,EmployeeAddress, NINumber, StartingSalary,IBAN,BIC) VALUES (?,?,?,?,?,?)", [employee.EmployeeName, employee.EmployeeAddress, employee.NINumber, employee.StartingSalary, employee.IBAN, employee.BIC]);

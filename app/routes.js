@@ -16,7 +16,6 @@ router.use(function (req, res, next) {
 });
 
 router.get('/list-employees', async (req, res) => {
-
     res.render('list-employees', {employees: await db.getEmployees()});
 })
 
