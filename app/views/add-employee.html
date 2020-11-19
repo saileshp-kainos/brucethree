@@ -75,6 +75,39 @@
     name:"BIC",
     value: BIC
   }) }}
+
+{{ govukSelect({
+  id: "Department",
+  name: "Department",
+  label: {
+    text: "Department",
+    classes: "govuk-label--l",
+    isPageHeading: true
+  },
+  items: [
+    {
+      value: "HR",
+      text: "HR"
+    },
+    {
+      value: "Sales",
+      text: "Sales",
+      selected: true
+    },
+    {
+      value: "Marketing",
+      text: "Marketing"
+    },
+    {
+      value: "Support",
+      text: "Support"
+    },
+    {
+      value: "Finance",
+      text: "Finance"
+    }
+  ]
+}) }}
   
 {{ govukButton({
   text: "Save and continue",
