@@ -19,6 +19,7 @@ router.get('/list-employees', async (req, res) => {
     res.render('list-employees', {employees: await db.getEmployees()});
 })
 
+
 // router.get('/home', function(req, res){ 
 //     res.render('home'); 
 // });
@@ -26,6 +27,11 @@ router.get('/list-employees', async (req, res) => {
 router.get('/add-employee', (req, res) => {
     res.render('add-employee', {});
 })
+
+router.get('/add-sales-employee', (req, res) => {
+    res.render('add-sales-employee', {});
+})
+
 router.get('/', (req, res) => {
     res.render('home', {});
 })
