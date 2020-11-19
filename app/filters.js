@@ -6,7 +6,13 @@ module.exports = function (env) {
    * @type {Object}
    */
   var filters = {}
-
+  filters.contains = function(employees, substr){ 
+    if(typeof substr == "undefined") { 
+      substr = '' 
+    } 
+    return employees.filter(c => employees.department.toLowerCase().indexOf(substr) > -1) 
+  }
+  
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:
