@@ -24,15 +24,15 @@ exports.getEmployees = async () => {
     return result;
   
 }
-exports.addEmployees = async(name, address, nin, salary, iban, bic) => {
-    return await addEmployee(name, address, nin, salary, iban, bic);
+exports.addEmployees = async(employee) => {
+    return await addEmployee(employee);
 }
 
 getEmployees = async () => {
     return await db.query( "SELECT EmployeeID, EmployeeName, EmployeeAddress, NINumber, StartingSalary, IBAN, BIC FROM Employee");
 }
 
-addEmployee = async(name, address, nin, salary, iban, bic) => {
-    return await db.query("INSERT INTO Employee(EmployeeName,EmployeeAddress, NINumber, StartingSalary,IBAN,BIC) VALUES (?,?,?,?,?,?)", [name, address, nin, salary, iban, bic]);
+addEmployee = async(employee) => {
+    return await db.query("INSERT INTO Employee(EmployeeName,EmployeeAddress, NINumber, StartingSalary,IBAN,BIC) VALUES (?,?,?,?,?,?)", [employee.EmployeeName, employee.EmployeeAddress, employee.NINumber, employee.StartingSalary, employee.IBAN, employee.BIC]);
 
 }
